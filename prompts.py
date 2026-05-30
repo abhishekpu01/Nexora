@@ -79,7 +79,7 @@ Schema:
 {
   "color_explanation": "A concise explanation of why these colors suit the user.",
   "style_preference": "Recommended clothing style category based on the user's overall appearance. Examples: Western Casual, Smart Casual, Formal, Business Casual, Streetwear, Ethnic, Indo-Western.",
-  "style_explaination": "A concise explaination of the recommended clothing style of why these styles suites user",
+  "style_explanation": "A concise explaination of the recommended clothing style of why these styles suites user",
   "color_combinations": [
     {
       "top": "color",
