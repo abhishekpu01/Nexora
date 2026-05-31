@@ -6,6 +6,7 @@ import os
 import json
 from prompts import COLOR_ASSISTANT_SYSTEM, IMAGE_ASSISTANT_SYSTEM
 from utils.utils import createSuccessResponse, createFailedResponse
+from nexoramcp_service.mcp_server import fetch_analysed_products
 
 load_dotenv()
 
@@ -37,6 +38,7 @@ def recommend(data: dict):
                 }
             ]
         )
+
         return createSuccessResponse(json.loads(response.choices[0].message.content))
 
     except Exception as e:
@@ -64,7 +66,11 @@ async def analyse(height: str = Form(...), weight: str = Form(...), face_tone: s
                 system_instruction=IMAGE_ASSISTANT_SYSTEM
             )
         )
-        return createSuccessResponse(json.loads(response.candidates[0].content.parts[0].text))
+
+        agent_response = json.loads(response.candidates[0].content.parts[0].text)
+        result = fetch_analysed_products(agent_response['outfit_types'], agent_response['color_combinations'])
+        agent_response['recommended_outfits'] = result
+        return createSuccessResponse(agent_response)
 
     except Exception as e:
         return createFailedResponse(str(e))

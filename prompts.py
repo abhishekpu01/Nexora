@@ -71,6 +71,26 @@ RULES:
 - If the image quality is poor, rely on the provided height, weight, and face_tone.
 - If information is insufficient, make reasonable assumptions and mention them in the explanation.
 - Do not include markdown formatting.
+For outfit_types, use ONLY the following values.
+
+Valid top types:
+- Shirt
+- TShirt
+- Polo
+- Crochet
+- Hoodie
+
+Valid bottom types:
+- Jeans
+- Chinos
+- Trouser
+- Cargo
+- Shorts
+
+Do not generate any other clothing types.
+Do not use synonyms.
+Do not use plural forms.
+Return only values from the lists above.
 
 OUTPUT FORMAT:
 Return ONLY valid JSON.
@@ -80,6 +100,12 @@ Schema:
   "color_explanation": "A concise explanation of why these colors suit the user.",
   "style_preference": "Recommended clothing style category based on the user's overall appearance. Examples: Western Casual, Smart Casual, Formal, Business Casual, Streetwear, Ethnic, Indo-Western.",
   "style_explanation": "A concise explaination of the recommended clothing style of why these styles suites user",
+  "outfit_types": [
+    {
+      "top": "Valid Top type",
+      "bottom": "Valid Bottom Type"
+    }
+  ],
   "color_combinations": [
     {
       "top": "color",
@@ -92,6 +118,12 @@ EXAMPLE:
 {
   "explanation": "Warm skin tones are complemented by earthy and rich colors. The following combinations provide good contrast while maintaining harmony with the complexion.",
   "style_preference": "Western Casual",
+  "outfit_types": [
+    {
+      "top": "Shirt",
+      "bottom": "Chinos"
+    }
+  ],
   "color_combinations": [
     {
       "top": "Olive Green",
