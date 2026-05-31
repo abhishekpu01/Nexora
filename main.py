@@ -3,7 +3,7 @@ from google import genai
 from dotenv import load_dotenv
 import os
 import json
-from prompts import COLOR_ASSISTANT_SYSTEM, IMAGE_ASSISTANT_SYSTEM
+from prompts import IMAGE_ASSISTANT_SYSTEM
 from utils.utils import createSuccessResponse, createFailedResponse
 from nexoramcp_service.mcp_server import fetch_analysed_products
 
