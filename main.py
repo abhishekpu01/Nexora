@@ -1,6 +1,5 @@
 from fastapi import FastAPI, UploadFile, File, Form
 from google import genai
-from openai import OpenAI
 from dotenv import load_dotenv
 import os
 import json
@@ -12,38 +11,6 @@ load_dotenv()
 
 app = FastAPI()
 geminiclient = genai.Client(api_key=os.getenv("GEMINI_API_KEY"))
-
-grokclient = OpenAI(
-    api_key=os.getenv("GROK_API_KEY"),
-    base_url=os.getenv("GROK_BASE_URL")
-)
-
-@app.post("/recommend")
-def recommend(data: dict):
-    try: 
-        response = grokclient.chat.completions.create(
-            model="llama-3.3-70b-versatile",
-            messages = [
-                {
-                    "role": "system",
-                    "content": COLOR_ASSISTANT_SYSTEM
-                },
-                {
-                    "role": "user",
-                    "content": f"""
-                    Height: {data.get('height')} cm
-                    Weight: {data.get('weight')} kg
-                    Face Tone: {data.get('face_tone')}
-                    """
-                }
-            ]
-        )
-
-        return createSuccessResponse(json.loads(response.choices[0].message.content))
-
-    except Exception as e:
-        return createFailedResponse(str(e))
-    
 
 @app.post("/analyse")
 async def analyse(height: str = Form(...), weight: str = Form(...), face_tone: str = Form(...), image: UploadFile = File(...)):
