@@ -1,5 +1,5 @@
 from sqlalchemy.orm import DeclarativeBase
-from sqlalchemy import Column, Integer, String, ForeignKey
+from sqlalchemy import Column, Integer, String, ForeignKey, JSON
 import uuid
 from sqlalchemy.dialects.postgresql import UUID
 
@@ -32,3 +32,16 @@ class ProductVariant(Base):
     image_url = Column(String)
 
     quantity = Column(Integer, default=0)
+
+
+class User(Base):
+    __tablename__ = "users"
+
+    user_id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
+    first_name = Column(String, nullable=False)
+    middle_name = Column(String, nullable=True)
+    last_name = Column(String, nullable=False)
+    email = Column(String, unique=True, index=True, nullable=False)
+    password = Column(String, nullable=False)
+    role = Column(String, nullable=False)
+    permissions = Column(JSON, default = list)

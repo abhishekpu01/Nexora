@@ -1,0 +1,14 @@
+from enum import Enum
+
+class Role(str, Enum):
+    ADMIN = "admin"
+    CUSTOMER = "customer"
+    INVENTORY_MANAGER = "inventory_manager"
+
+class Permission(str, Enum):
+    PRODUCT_CREATE = "PRODUCT_CREATE"
+    PRODUCT_EDIT = "PRODUCT_EDIT"
+    PRODUCT_DELETE = "PRODUCT_DELETE"
+    PRODUCTVARIANT_CREATE = "PRODUCTVARIANT_CREATE"
+    PRODUCTVARIANT_EDIT = "PRODUCTVARIANT_EDIT"
+    PRODUCTVARIANT_DELETE = "PRODUCTVARIANT_DELETE"
